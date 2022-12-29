@@ -80,10 +80,10 @@ export default function TextForm(props) {
             </div>
             <div className={`container  text-${props.mode === 'light' ? 'dark' : 'light'}`}> {/*text-${returnFn() === 'success' ? 'light' : 'dark'}*/}{/*if navbar is used then comment out colorMode fn and comment in navbar function*/}
                 <h2>Text Summary</h2>
-                <p>Your words {text.split("").length===0 ? 0 : text.split(' ').length } Your character {text.length}</p>   {/* -1 isliye karna pada kyuki word text.split(" ").length gives default value for empty string */}
+                <p>Your words {text.split(/\s+/).filter((element)=> element !== '').length} Your character {text.split(/\s+/).filter((element)=> element !== '').join('').length}</p>   {/* -1 isliye karna pada kyuki word text.split(" ").length gives default value for empty string */}
             </div>
             <div className={`container text-${props.mode === 'light' ? 'dark' : 'light'}`}> {/*text-${props.mode === 'light' ? 'dark' : 'light'}*/}
-                <h4>Time taken to this word is {0.3 / 100 * text.length} minutes</h4>
+                <h4>Time taken to read this words is {0.3 / 100 * text.split(/\s+/).filter((element)=> element !== '').join('').length} minutes</h4>
             </div>
             <div className={`container text-${props.mode === 'light' ? 'dark' : 'light'}`}> {/*text-${returnFn() === 'primary' ? 'dark' : returnFn() === 'success' ? 'light' : returnFn() === 'warning' ? 'dark' : returnFn() === 'info' ? 'dark' : ''}*/}
                 <h2>Preview</h2> 
