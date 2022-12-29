@@ -27,7 +27,7 @@ let toggleButton=()=>{
 
   return (<>
     <div className="container" style={mystyle}>
-      <h1 >About Us</h1>
+      <h1 n>About Us</h1>
       <div className="accordion" id="accordionExample">
         <div className="accordion-item" style={mystyle}>
           <h2 className="accordion-header" id="headingOne">

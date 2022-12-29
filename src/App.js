@@ -64,18 +64,19 @@ function App() {
   }
 
   return (
-    <>  <Router>
+    <>
+      <Router>
       <Navbar titles="TextUtilies" mode={Mode} toggleMode={toggleMode} About='About' />
       <Alert alert={alert} />
-      {/*color={Color} enable it when state variable color become active}
-      <ColorMode ThemeChanger={ThemeChanger} />
+      {/* <TextForm heading="Enter the text" ShowAlert={ShowAlert} mode={Mode} /> */}
+      {/* color={Color} enable it when state variable color become active}
+      <ColorMode ThemeChanger={ThemeChanger} /> */}
       {/* <About /> */}
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-
       <Routes >
-        <Route path="/" element={<About  mode={Mode}/>} />
-        <Route path="home" element={<TextForm heading="Enter the text" ShowAlert={ShowAlert} mode={Mode} />} />
+        <Route path="about" element={<About mode={Mode} />} />
+        <Route path="/" element={<TextForm heading="Enter the text" ShowAlert={ShowAlert} mode={Mode} />} />
       </Routes>
     </Router>
     </>
