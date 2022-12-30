@@ -35,12 +35,13 @@ export default function TextForm(props) {
         NewText(event.target.value)
     }
     let processor = (event) => {
-        if (/-->/.test(text) === false) {
+        if (!/-->/.test(text)) {
             event.preventDefault()
+            let arr_Words = text.split(/\s+/).filter((x) => x !== '')
             let obj = {}
-            for (let i in text.split(' ')) {
-                if (obj[text.split(' ')[i]] === undefined) { obj[text.split(' ')[i]] = 1 }
-                else obj[text.split(' ')[i]]++
+            for (let i in arr_Words) {
+                if (obj[arr_Words[i]] === undefined) { obj[arr_Words[i]] = 1 }
+                else obj[arr_Words[i]]++
             }
             let arr = []
             for (let key in obj) {
@@ -64,30 +65,46 @@ export default function TextForm(props) {
         props.ShowAlert('unusualSpaces successfully removed', 'success')
 
     }
+    // let handleCopy = (event) => {
+    //     var copyText = document.getElementById("form-contral");
+    //     copyText.select();
+    //     copyText.setSelectionRange(0, 99999);
+    //     navigator.clipboard
+    //         .writeText(copyText.value)
+    //         .then(() => {
+    //             alert("successfully copied",'success');
+    //         })
+    //         .catch(() => {
+    //             alert("something went wrong",'danger');
+    //         });
+
+    // }   //not working
     return (
         <>
             <div className="container">
                 <form className={`container  text-${props.mode === 'light' ? 'dark' : 'light'}`}>
-                    <h1 className={`container  text-${props.mode === 'light' ? 'dark' :'light'}`}>{props.heading}</h1>
-                    <textarea name="" className={`form-control  mt-3`} style={{ background: props.mode === 'light' ? 'white' : 'grey', color: props.mode === 'light' ? 'black' : 'white' }} id='form-contral' cols="90" rows="10" value={text} onChange={onchangefn}></textarea>
-                    <button type="text" className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3`} onClick={onclickfn_1}>click to convert text to Uppercase</button>
-                    <button type="text" className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3 ms-3`} onClick={onclickfn_2}>click to convert text to lowercase</button>
-                    <button type='text' className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3 ms-3`} onClick={processor}>click only ones to count words</button>
-                    <button type='text' className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3 ms-3`}>Reload</button>
-                    <button type='text' className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3 ms-3`} onClick={Remove_unusualSpaces}>Remove unusual spaces</button>
+                    <h1 className={`container  text-${props.mode === 'light' ? 'dark' : 'light'}`}>{props.heading}</h1>
+                    <textarea name="" className={`form-control  mt-3`} style={{ background: props.mode === 'light' ? 'white' : '#202255', color: props.mode === 'light' ? 'black' : 'white' }} id='form-contral' cols="90" rows="10" value={text} onChange={onchangefn}></textarea>
+                    <button type="text" disabled={text.split(/\s+/).filter((x) => x !== '').length === 0} className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3`} onClick={onclickfn_1}>click to convert text to Uppercase</button>
+                    <button type="text" disabled={text.split(/\s+/).filter((x) => x !== '').length === 0} className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3 ms-3`} onClick={onclickfn_2}>click to convert text to lowercase</button>
+                    <button type='text' disabled={text.split(/\s+/).filter((x) => x !== '').length === 0} className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3 ms-3`} onClick={processor}>click only ones to count words</button>
+                    <button type='text' disabled={text.split(/\s+/).filter((x) => x !== '').length === 0} className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3 ms-3`}>Reload</button>
+                    <button type='text' disabled={text.split(/\s+/).filter((x) => x !== '').length === 0} className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3 ms-3`} onClick={Remove_unusualSpaces}>Remove unusual spaces</button>
+                    {/* <button type='text' disabled={text.split(/\s+/).filter((x) => x !== '').length === 0} className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3 ms-3`} onClick={handleCopy}>Copy text</button> */}
+
                 </form>
 
             </div>
             <div className={`container  text-${props.mode === 'light' ? 'dark' : 'light'}`}> {/*text-${returnFn() === 'success' ? 'light' : 'dark'}*/}{/*if navbar is used then comment out colorMode fn and comment in navbar function*/}
                 <h2>Text Summary</h2>
-                <p>Your words {text.split(/\s+/).filter((element)=> element !== '').length} Your character {text.split(/\s+/).filter((element)=> element !== '').join('').length}</p>   {/* -1 isliye karna pada kyuki word text.split(" ").length gives default value for empty string */}
+                <p>Your words {text.split(/\s+/).filter((element) => element !== '').length} Your character {text.split(/\s+/).filter((element) => element !== '').join('').length}</p>   {/* -1 isliye karna pada kyuki word text.split(" ").length gives default value for empty string */}
             </div>
             <div className={`container text-${props.mode === 'light' ? 'dark' : 'light'}`}> {/*text-${props.mode === 'light' ? 'dark' : 'light'}*/}
-                <h4>Time taken to read this words is {0.3 / 100 * text.split(/\s+/).filter((element)=> element !== '').join('').length} minutes</h4>
+                <h4>Time taken to read this words is {0.3 / 100 * text.split(/\s+/).filter((element) => element !== '').join('').length} minutes</h4>
             </div>
             <div className={`container text-${props.mode === 'light' ? 'dark' : 'light'}`}> {/*text-${returnFn() === 'primary' ? 'dark' : returnFn() === 'success' ? 'light' : returnFn() === 'warning' ? 'dark' : returnFn() === 'info' ? 'dark' : ''}*/}
-                <h2>Preview</h2> 
-                <p>{text === '' ? 'Enter something to preview' : text}</p>  
+                <h2>Preview</h2>
+                <p>{text === '' ? 'Nothing to preview' : text}</p>
             </div>       {/*          */}
         </>
     )

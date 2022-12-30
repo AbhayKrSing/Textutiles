@@ -76,7 +76,7 @@ function App() {
             renders the first one that matches the current URL. */}
       <Routes >
         <Route path="about" element={<About mode={Mode} />} />
-        <Route path="/" element={<TextForm heading="Enter the text" ShowAlert={ShowAlert} mode={Mode} />} />
+        <Route path="/" element={<TextForm heading="Word counter,Character counter,Remove extra spacer,Uppercase & Lowercase converter" ShowAlert={ShowAlert} mode={Mode} />} />
       </Routes>
     </Router>
     </>
