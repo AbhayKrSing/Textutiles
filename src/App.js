@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import Alert from './components/Alert';
 import React, { useState } from 'react'
-// import ColorMode from './components/ColorMode';
+
 import {
   HashRouter as Router,
   Routes,
@@ -16,31 +16,6 @@ import About from './components/About';
 function App() {
   const [Mode, SetMode] = useState('light');
   const [alert, setalert] = useState(null)
-  // const [Color, setColor] = useState('')
-  // let ThemeChanger = (event) => {
-  //   if (event.target.getAttribute('class') === 'btn btn-light mx-2') {
-  //     document.body.style.backgroundColor = 'white'
-  //     setColor('white')
-  //     ShowAlert('Light Mode is Successfully enabled', 'success')
-  //   }
-  //   else if (event.target.getAttribute('class') === 'btn btn-success mx-2') {
-  //     document.body.style.backgroundColor = '#698000'
-  //     setColor('green')
-  //     ShowAlert('Green Mode is Successfully enabled', 'success')
-  //   }
-  //   else if (event.target.getAttribute('class') === 'btn btn-warning mx-2') {
-  //     document.body.style.backgroundColor = '#ff7a00cc'
-  //     setColor('yellow')
-  //     ShowAlert('yellow Mode is Successfully enabled', 'success')
-  //   }
-  //   else if (event.target.getAttribute('class') === 'btn btn-info mx-2') {
-  //     document.body.style.backgroundColor = 'lightblue'
-  //     setColor('lightblue')
-  //     ShowAlert('Blue Mode is Successfully enabled', 'success')
-  //   }
-
-  // }
-  // document.title = `${Color===''?'TextUtiles-app':`TextUtiles ${Color}-mode`}`
   let ShowAlert = (message, type) => {
     setalert({
       message: message,
@@ -50,16 +25,24 @@ function App() {
       setalert(null)
     }, 1000)
   }
-  let toggleMode = () => {
+  let toggleMode = (cls) => {
     if (Mode === 'light') {
-      SetMode('dark')
-      document.body.style.backgroundColor = '#29296d'
-      ShowAlert('Dark Mode is Successfully enabled', 'success')
+      SetMode(cls)
+      document.body.classList.add(`bg-${cls}`)
+      ShowAlert(`${cls.charAt(0).toUpperCase()+cls.slice(1)} Mode is Successfully enabled`, 'success')
     }
-    else {
+    else if(Mode === cls) {
       SetMode('light')
-      document.body.style.backgroundColor = 'white'
+      // document.body.style.backgroundColor = 'white'
+      document.body.removeAttribute('class','')
       ShowAlert('Light Mode is Successfully enabled', 'success')
+    }
+    else{
+      SetMode(cls)
+      document.body.removeAttribute('class','')
+      document.body.classList.add(`bg-${cls}`)
+      ShowAlert(`${cls.charAt(0).toUpperCase()+cls.slice(1)} Mode is Successfully enabled`, 'success')
+
     }
   }
 

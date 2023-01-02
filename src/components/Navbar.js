@@ -21,11 +21,15 @@ export default function Navbar(props) {
               <Link className={`nav-link text-${props.mode==='light'? 'dark':'light'}`} to="about">{props.About}</Link>
             </li>
           </ul>
-          <div className="form-check form-switch">
-            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={props.toggleMode} />
-            <label className={`form-check-label text-${props.mode==='light'? 'dark':'light'}`} htmlFor="flexSwitchCheckDefault" >Enable Dark mode</label>
+          <div className="form-check form-switch d-md-none">
+            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={()=>props.toggleMode('dark')} />
+            <label className={`form-check-label text-${props.mode==='light'? 'dark':'light'}`} htmlFor="flexSwitchCheckDefault" >Enable {`${props.mode==='light'? 'Dark':'Light'}`} mode</label>
           </div>
-        {/* <button className={`btn btn-${props.mode==='dark'?'light':'dark'}`} style={{width:'2%',height:'5vh'}} onClick={props.toggleMode}></button> */}
+        <button className={`btn btn-${props.mode==='primary'?'light':'primary'} d-md-block d-none mx-1 `} style={{width:'2%',height:'5vh'}} onClick={()=>{props.toggleMode('primary')}}></button>
+        <button className={`btn btn-${props.mode==='success'?'light':'success'} d-md-block d-none mx-1`} style={{width:'2%',height:'5vh'}} onClick={()=>{props.toggleMode('success')}}></button>
+        <button className={`btn btn-${props.mode==='warning'?'light':'warning'} d-md-block d-none mx-1`} style={{width:'2%',height:'5vh'}} onClick={()=>{props.toggleMode('warning')}}></button>
+        <button className={`btn btn-${props.mode==='info'?'light':'info'} d-md-block d-none mx-1`} style={{width:'2%',height:'5vh'}} onClick={()=>{props.toggleMode('info')}}></button>
+
         </div>
       </div>
     </nav>
