@@ -25,43 +25,44 @@ function App() {
       setalert(null)
     }, 1000)
   }
+  let backgroundColorer ={ backgroundColor: Mode === 'primary' ? '#292996a3' : Mode === 'warning'?'#86862296':Mode === 'success'?'#325a32':Mode === 'info'?'#157da8':''}
   let toggleMode = (cls) => {
     if (Mode === 'light') {
       SetMode(cls)
       document.body.classList.add(`bg-${cls}`)
-      ShowAlert(`${cls.charAt(0).toUpperCase()+cls.slice(1)} Mode is Successfully enabled`, 'success')
+      ShowAlert(`${cls.charAt(0).toUpperCase() + cls.slice(1)} Mode is Successfully enabled`, 'success')
     }
-    else if(Mode === cls) {
+    else if (Mode === cls) {
       SetMode('light')
       // document.body.style.backgroundColor = 'white'
-      document.body.removeAttribute('class','')
+      document.body.removeAttribute('class')
       ShowAlert('Light Mode is Successfully enabled', 'success')
     }
-    else{
+    else {
       SetMode(cls)
-      document.body.removeAttribute('class','')
+      document.body.removeAttribute('class', '')
       document.body.classList.add(`bg-${cls}`)
-      ShowAlert(`${cls.charAt(0).toUpperCase()+cls.slice(1)} Mode is Successfully enabled`, 'success')
-
+      ShowAlert(`${cls.charAt(0).toUpperCase() + cls.slice(1)} Mode is Successfully enabled`, 'success')
     }
+
   }
 
   return (
     <>
       <Router>
-      <Navbar titles="TextUtilies" mode={Mode} toggleMode={toggleMode} About='About' />
-      <Alert alert={alert} />
-      {/* <TextForm heading="Enter the text" ShowAlert={ShowAlert} mode={Mode} /> */}
-      {/* color={Color} enable it when state variable color become active}
+        <Navbar titles="TextUtilies" mode={Mode} toggleMode={toggleMode} About='About' backgroundColorer={backgroundColorer} />
+        <Alert alert={alert} />
+        {/* <TextForm heading="Enter the text" ShowAlert={ShowAlert} mode={Mode} /> */}
+        {/* color={Color} enable it when state variable color become active}
       <ColorMode ThemeChanger={ThemeChanger} /> */}
-      {/* <About /> */}
-      {/* A <Switch> looks through its children <Route>s and
+        {/* <About /> */}
+        {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-      <Routes >
-        <Route path="about" element={<About mode={Mode} />} />
-        <Route path="/" element={<TextForm heading="Word counter,Character counter,Remove extra spacer,Uppercase & Lowercase converter" ShowAlert={ShowAlert} mode={Mode} />} />
-      </Routes>
-    </Router>
+        <Routes >
+          <Route path="about" element={<About mode={Mode} />} />
+          <Route path="/" element={<TextForm heading="Word counter,Character counter,Remove extra spacer,Uppercase & Lowercase converter" ShowAlert={ShowAlert} mode={Mode} />} />
+        </Routes>
+      </Router>
     </>
   );  //semi colon(;) niche isliye lga hi kyuki react automatically ise agar kahi aur assign kar dega to dikkat aajayegi
 }
