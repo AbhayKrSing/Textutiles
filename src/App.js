@@ -25,7 +25,9 @@ function App() {
       setalert(null)
     }, 1000)
   }
-  let backgroundColorer ={ backgroundColor: Mode === 'primary' ? '#292996a3' : Mode === 'warning'?'#86862296':Mode === 'success'?'#325a32':Mode === 'info'?'#157da8':''}
+  let backgroundColorer = {
+    backgroundColor: Mode === 'primary' ? '#294a96ad' : Mode === 'warning' ? '#868622' : Mode === 'success' ? '#325a32' : Mode === 'info' ? '#157da8' : Mode==='light'?'#dee2e6':'dark',
+  }
   let toggleMode = (cls) => {
     if (Mode === 'light') {
       SetMode(cls)
@@ -60,7 +62,7 @@ function App() {
             renders the first one that matches the current URL. */}
         <Routes >
           <Route path="about" element={<About mode={Mode} />} />
-          <Route path="/" element={<TextForm heading="Word counter,Character counter,Remove extra spacer,Uppercase & Lowercase converter" ShowAlert={ShowAlert} mode={Mode} />} />
+          <Route path="/" element={<TextForm heading="Word counter,Character counter,Remove extra spacer,Uppercase & Lowercase converter" ShowAlert={ShowAlert} mode={Mode} backgroundColorer={backgroundColorer}/>} />
         </Routes>
       </Router>
     </>
