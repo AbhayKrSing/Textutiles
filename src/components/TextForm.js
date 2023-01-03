@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 export default function TextForm(props) {
     const [text, NewText] = useState("");
- 
+   
     let onclickfn_1 = (event) => {
         /* console.clear()
            console.log(event)  //event active happened
@@ -59,20 +59,12 @@ export default function TextForm(props) {
         props.ShowAlert('unusualSpaces successfully removed', 'success')
 
     }
-    // let handleCopy = (event) => {
-    //     var copyText = document.getElementById("form-contral");
-    //     copyText.select();
-    //     copyText.setSelectionRange(0, 99999);
-    //     navigator.clipboard
-    //         .writeText(copyText.value)
-    //         .then(() => {
-    //             alert("successfully copied",'success');
-    //         })
-    //         .catch(() => {
-    //             alert("something went wrong",'danger');
-    //         });
+    let handleCopy=()=>{
+        navigator.clipboard.writeText(text)
+        props.ShowAlert('letter successfully Copy', 'success')
 
-    // }   //not working
+    }
+
     return (
         <>
             <div className="container">
@@ -84,6 +76,8 @@ export default function TextForm(props) {
                     <button type='text' disabled={text.split(/\s+/).filter((x) => x !== '').length === 0} style={props.backgroundColorer} className={`btn mt-3 ms-3 text-${props.mode === 'light' ? 'light' : 'light'} bg-${props.mode==='light'?'primary':''}`} onClick={processor}>click only ones to count words</button>
                     <button type='text' disabled={text.split(/\s+/).filter((x) => x !== '').length === 0} style={props.backgroundColorer} className={`btn mt-3 ms-3 text-${props.mode === 'light' ? 'light' : 'light'} bg-${props.mode==='light'?'primary':''}`}>Reload</button>
                     <button type='text' disabled={text.split(/\s+/).filter((x) => x !== '').length === 0} style={props.backgroundColorer} className={`btn mt-3 ms-3 text-${props.mode === 'light' ? 'light' : 'light'} bg-${props.mode==='light'?'primary':''}`} onClick={Remove_unusualSpaces}>Remove unusual spaces</button>
+                    <button type='text' disabled={text.split(/\s+/).filter((x) => x !== '').length === 0} style={props.backgroundColorer} className={`btn mt-3 ms-3 text-${props.mode === 'light' ? 'light' : 'light'} bg-${props.mode==='light'?'primary':''}`} onClick={handleCopy}>Copy text</button>
+
                     {/* <button type='text' disabled={text.split(/\s+/).filter((x) => x !== '').length === 0} className={`btn btn-${props.mode === 'light' ? 'primary' : 'dark'} mt-3 ms-3`} onClick={handleCopy}>Copy text</button> */}
 
                 </form>
@@ -99,7 +93,7 @@ export default function TextForm(props) {
             <div className={`container text-${props.mode === 'light' ? 'dark' : 'light'}`}>
                 <h2>Preview</h2>
                 <p>{text === '' ? 'Nothing to preview' : text}</p>
-            </div>       {/*          */}
+            </div>      
         </>
     )
 }
